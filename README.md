@@ -150,17 +150,27 @@ Proyecto del **Sprint 10** en **TripleTen**. Desarrollo de un modelo de **Machin
 
    ```bash
    git clone https://github.com/cjhirashi/proyecto-sprint-10.git
+   ```
+
+2. **Acceder a carpeta del proyecto**
+
+   ```bash
    cd proyecto-sprint-10
    ```
 
-2. **Crear entorno con Conda**
+3. **Crear entorno con Conda**
 
    ```bash
    conda env create -f environment.yml
+   ```
+
+4. **Activar el entorno ya creado**
+
+   ```bash
    conda activate tp-sprint-10
    ```
 
-3. **Ejecutar Notebook**
+5. **Ejecutar Notebook**
 
    ```bash
    jupyter notebook notebooks/sprint10_analysis.ipynb
@@ -181,6 +191,12 @@ Proyecto del **Sprint 10** en **TripleTen**. Desarrollo de un modelo de **Machin
   ```bash
   conda env create -f environment.yml
   conda activate tp-sprint-10
+  ```
+  
+* **Desactivar entorno** (cuando se desea cerrar el entorno):
+  
+  ```bash
+  conda deactivate
   ```
 
 ---
