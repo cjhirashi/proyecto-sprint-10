@@ -130,17 +130,83 @@ Proyecto del **Sprint 10** en **TripleTen**. Desarrollo de un modelo de **Machin
 
 ## 📊 Conclusiones y Resultados Esperados
 
-* **Modelo base:** reflejará el desbalance del dataset.
-* **Técnicas de balanceo:** se espera mejora significativa en `F1`.
-* **Métrica objetivo:** F1 ≥ 0.59 en conjunto de prueba.
-* **Comparación:** AUC-ROC vs F1 para evaluar robustez del modelo.
+Durante el desarrollo del proyecto se entrenaron y compararon diferentes modelos de clasificación para predecir la deserción de clientes en **Beta Bank**.  
+A continuación, se resumen los resultados más relevantes:
 
-### 🚀 Recomendaciones (al cierre del proyecto)
+---
 
-1. Documentar el mejor modelo y su configuración final.
-2. Analizar impacto de balanceo en los resultados.
-3. Considerar validación cruzada para mayor robustez.
-4. Probar técnicas adicionales de ingeniería de características.
+### 🔹 Modelos base (sin balanceo de clases)
+
+- **Árbol de Decisión:**  
+  - F1 = **0.588**  
+  - AUC-ROC = **0.843**  
+  El modelo logra un F1 aceptable cercano al umbral (0.59), pero aún inestable. El AUC-ROC muestra una buena capacidad de distinguir entre clientes que permanecen y los que abandonan.
+
+- **Random Forest:**  
+  - F1 = **0.586**  
+  - AUC-ROC = **0.876**  
+  El bosque aleatorio superó al Árbol de Decisión en discriminación (AUC-ROC más alto), aunque el F1 sigue por debajo del umbral.
+
+- **Regresión Logística:**  
+  - F1 = **0.327**  
+  - AUC-ROC = **0.791**  
+  El modelo lineal mostró limitaciones claras para capturar el churn, con un F1 muy bajo aunque con una separación moderada de clases.
+
+---
+
+### 🔹 Modelos con balanceo de clases
+
+Dado el fuerte desbalance (80% permanecen vs 20% abandonan), se aplicaron **Oversampling** y **Undersampling**.  
+
+- **Árbol de Decisión con Oversampling:**  
+  - F1 = **0.572**  
+  - AUC-ROC = **0.855**  
+  Mejoró la estabilidad en las predicciones, aunque no logró superar el umbral de F1 ≥ 0.59.
+
+- **Random Forest con Oversampling:**  
+  - F1 = **0.630**  
+  - AUC-ROC = **0.876**  
+  Se convirtió en el modelo más sólido, superando claramente el umbral de F1 y manteniendo un alto AUC-ROC.  
+
+- **Regresión Logística con Oversampling:**  
+  - F1 = **0.521**  
+  - AUC-ROC = **0.794**  
+  La métrica F1 mejoró respecto al modelo base, pero sigue siendo insuficiente frente al requisito.
+
+- **Árbol de Decisión con Undersampling:**  
+  - F1 = **0.568**  
+  - AUC-ROC = **0.858**  
+  Buen desempeño, aunque ligeramente inferior al oversampling.
+
+- **Random Forest con Undersampling:**  
+  - F1 = **0.601**  
+  - AUC-ROC = **0.870**  
+  El modelo mantuvo un rendimiento alto, aunque algo menor al Random Forest con Oversampling.
+
+- **Regresión Logística con Undersampling:**  
+  - F1 = **0.518**  
+  - AUC-ROC = **0.793**  
+  Mejoró respecto al modelo base, pero sigue sin ser competitivo.
+
+---
+
+### 🚀 Modelo final en conjunto de prueba
+
+El modelo elegido para la evaluación final fue **Random Forest con Oversampling**, ya que:  
+- Fue el único que superó de forma consistente el umbral de **F1 ≥ 0.59**.  
+- Mostró un equilibrio adecuado entre precisión y recall.  
+- Conservó un AUC-ROC elevado, demostrando alta capacidad para discriminar entre clientes que permanecen y los que abandonan.
+
+**Resultados en test (datos no vistos):**  
+- **F1 = 0.611**  
+- **AUC-ROC = 0.860**
+
+---
+
+### ✅ Conclusión general
+
+El modelo de **Random Forest con Oversampling** se consolida como la mejor alternativa para **Beta Bank**, ya que cumple con el criterio de desempeño exigido y ofrece una herramienta confiable para identificar clientes en riesgo de abandono.  
+Su implementación permitirá diseñar estrategias de retención más efectivas, optimizar recursos de marketing y mejorar la fidelización de clientes.
 
 ---
 
