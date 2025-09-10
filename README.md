@@ -30,7 +30,6 @@ Proyecto del **Sprint 10** en **TripleTen**. Desarrollo de un modelo de **Machin
 * [Pandas](https://pandas.pydata.org/)
 * [NumPy](https://numpy.org/)
 * [Scikit-Learn](https://scikit-learn.org/stable/)
-* [Imbalanced-Learn](https://imbalanced-learn.org/stable/)
 * [Jupyter Notebook](https://jupyter.org/)
 * [Conda](https://docs.conda.io/) – gestión de entornos y dependencias
 
