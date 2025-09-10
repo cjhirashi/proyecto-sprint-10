@@ -39,50 +39,80 @@ Proyecto del **Sprint 10** en **TripleTen**. Desarrollo de un modelo de **Machin
 
 ## ✅ PASOS DEL PROYECTO
 
-1. **Carga y revisión inicial de datos**
+El desarrollo del proyecto se llevó a cabo en un **notebook** que documenta paso a paso el análisis y modelado, complementado con la posibilidad de trasladar funciones a scripts dentro de la carpeta `src/` para facilitar su reutilización.  
 
-   * Vista general de columnas y tipos de datos.
-   * Revisión de valores faltantes y estadísticos descriptivos.
-   * Exploración de la variable objetivo `Exited`.
+### 📒 Pasos en el Notebook
 
-2. **Partición de datos (train/valid/test)**
+**Encabezado y configuración inicial**  
+   - Importación de librerías y verificación de versiones.  
+   - Definición del estilo visual para gráficos.  
 
-   * División sugerida: `60% / 20% / 20%`.
-   * Separación entre `features` y `target`.
-   * Uso de `random_state` para asegurar reproducibilidad.
+1. **Carga del dataset y vista rápida**  
+   - Inspección inicial de filas, columnas y tipos de datos.  
+   - Revisión de valores nulos y duplicados.  
 
-3. **Preparación de datos**
+2. **Calidad de datos y tratamiento de nulos**  
+   - Revisión de datos duplicados, valores nulos y estadísticas descriptivas. 
+   - Reemplazo de nulos en `Tenure` por **0** (clientes con menos de un año en el banco).  
 
-   * Conversión de tipos de datos.
-   * Escalado de características con `StandardScaler`.
-   * Codificación de variables categóricas (`Geography`, `Gender`).
+3. **Análisis exploratorio de datos (EDA)**  
+   - Distribución de la variable objetivo `Exited` y detección de desbalance.  
+   - Distribuciones de variables numéricas (CreditScore, Age, Balance, EstimatedSalary).  
+   - Relación de variables categóricas (`Geography`, `Gender`) con el churn.  
+   - Detección de valores extremos mediante boxplots.  
 
-4. **Modelo base (sin balanceo)**
+4. **Preprocesamiento de datos**  
+   - Selección de variables (`features` y `target`).  
+   - Codificación de variables categóricas con One-Hot Encoding.  
+   - Escalado de variables numéricas con `StandardScaler`.  
 
-   * Entrenar varios algoritmos sin corrección de desbalance.
-   * Registrar métricas iniciales (`F1`, `AUC-ROC`).
+5. **Partición de datos (train/valid/test)**  
+   - División estratificada en proporción 60/20/20.  
 
-5. **Técnicas de balanceo y mejora de modelos**
+6. **Entrenamiento de modelos base (sin balanceo)**  
+   - Árbol de Decisión.  
+   - Random Forest.  
+   - Regresión Logística.  
 
-   * Aplicar **sobremuestreo (SMOTE)**.
-   * Aplicar **submuestreo aleatorio**.
-   * Ajustar hiperparámetros básicos en modelos de árboles: `max_depth`, `min_samples_split`, `min_samples_leaf`.
+7. **Aplicación de técnicas de balanceo**  
+   - **Oversampling**: duplicación de la clase minoritaria.  
+   - **Undersampling**: reducción de la clase mayoritaria.  
 
-6. **Selección del mejor modelo**
+8. **Entrenamiento de modelos con balanceo**  
+   - Árbol de Decisión con Oversampling.  
+   - Random Forest con Oversampling.  
+   - Regresión Logística con Oversampling.
+   - Árbol de Decisión con Undersampling.  
+   - Random Forest con Undersampling.  
+   - Regresión Logística con Undersampling. 
 
-   * Comparar resultados en *valid*.
-   * Seleccionar el modelo con mejor rendimiento.
+9. **Evaluación final en conjunto de prueba (test)**  
+    - Selección del mejor modelo.  
+    - Evaluación final con métricas en datos no vistos.  
 
-7. **Evaluación final en test**
+10. **Conclusiones y recomendaciones finales**  
+    - Análisis exploratorio de datos (EDA).  
+    - Modelos base.  
+    - Técnicas de balanceo.
+    - Modelo final seleccionado.
+    - Recomentaciones.
 
-   * Medición de `F1` y `AUC-ROC` en conjunto de prueba.
-   * Matriz de confusión y `classification_report`.
+---
 
-8. **Conclusiones y recomendaciones**
+### ⚙️ Pasos previstos para `src/`
 
-   * Identificación del mejor modelo entrenado.
-   * Observaciones sobre el impacto del balanceo.
-   * Próximos pasos sugeridos.
+Aunque el análisis principal se realizó en el notebook, la carpeta `src/` permite trasladar el código a funciones reutilizables y más limpias para futuros proyectos:
+
+- **`preprocessing.py`**  
+  - Función para cargar y limpiar el dataset.  
+  - Función para codificación de variables categóricas.  
+  - Función para escalar variables numéricas.  
+  - Función para dividir los datos en train/valid/test.  
+
+- **`models.py`**  
+  - Función para entrenar y evaluar un modelo con métricas (F1, AUC-ROC).  
+  - Función para aplicar oversampling o undersampling al conjunto de entrenamiento.  
+  - Función para comparar múltiples modelos y seleccionar el mejor.  
 
 ---
 
